@@ -1,6 +1,9 @@
 require 'maze'
 require 'random'
 
+local xPos = 1
+local yPos = 1
+
 function love.load()
     -- get the maze from maze.lua
     local maze = {}
@@ -12,17 +15,60 @@ function love.load()
     wallSprite = love.graphics.newImage("res/sprites/wall.png")
     playerSprite = love.graphics.newImage("res/sprites/player.png")
     
-    local xPos = 1
-    local yPos = 1
     
     love.graphics.setBackgroundColor(255,255,255)
 end
 
 function love.update(dt)
+    love.draw()
+    if (maze[xPos][yPos] == 2) then
+        love.quit()
+    end
+    
+end
+
+function love.keypressed(key)
+    if (key == 'w') then
+        if (maze [xPos][yPos-1] ~= nil
+            and maze [xPos][yPos-1] ~= 0
+            and xPos > 0
+            and xPos <= 16
+            and yPos-1 > 0
+            and yPos-1 <= 16)
+            then yPos = yPos-1 end
+            
+    elseif (key == 'a') then
+        if (maze [xPos-1][yPos] ~= nil
+            and maze [xPos-1][yPos] ~= 0
+            and xPos-1 > 0
+            and xPos-1 <= 16
+            and yPos > 0
+            and yPos <= 16)
+            then xPos = xPos-1 end
+            
+    elseif (key == 's') then
+        if (maze [xPos][yPos+1] ~= nil
+            and maze [xPos][yPos+1] ~= 0
+            and xPos > 0
+            and xPos <= 16
+            and yPos+1 > 0
+            and yPos+1 <= 16)
+            then yPos = yPos+1 end
+            
+    elseif (key == 'd') then
+        if (maze [xPos+1][yPos] ~= nil
+            and maze [xPos+1][yPos] ~= 0
+            and xPos+1 > 0
+            and xPos+1 <= 16
+            and yPos > 0
+            and yPos <= 16)
+            then xPos = xPos+1 end
+    else end
 
 end
 
 function love.draw()
+    -- draw the matrix
     for i = 1, 10 do
         for j = 1, 10 do
             love.graphics.draw(tileSprite, i*16, j*16)
@@ -36,6 +82,13 @@ function love.draw()
             
         end
     end
+    
+    -- draw the player icon
+    love.graphics.draw(playerSprite, xPos*16, yPos*16)
+end
+
+function love.quit()
+    print("Thanks for playing!")
 end
 
 --function createMap()
