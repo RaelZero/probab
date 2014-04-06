@@ -17,8 +17,18 @@ function love.load()
     wallSprite = love.graphics.newImage("res/sprites/wall.png")
     playerSprite = love.graphics.newImage("res/sprites/player.png")
     
-    
+    -- sets BGCOLOR to black
     love.graphics.setBackgroundColor(255,255,255)
+    
+    -- find where to position the player
+    for i = 1, xSize do
+        for j = 1, ySize do
+            if maze[i][j] == 3 then
+                xPos = i
+                yPos = j
+            end
+        end
+    end
 end
 
 function love.update(dt)
