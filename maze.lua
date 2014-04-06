@@ -50,7 +50,7 @@ function getMaze(x, y)
     }
     ]]
     
-    -- randomize starting position
+    -- randomize starting generation position
     startR = math.random(1, x)
     while (startR % 2) ~= 0 do
         startR = math.random(1, x)
@@ -61,9 +61,25 @@ function getMaze(x, y)
         startC = math.random(1, y)
     end
     
-    maze[startR][startC] = 3
-    
     generate(startR,startC)
+    
+    -- set starting to the farthest point to the left
+    for i = 1, width do
+        for j = 1, height do
+            if maze[i][j] == 1 then
+                maze[i][j] = 3
+            end
+        end
+    end
+    
+    -- set goal to the farthest point to the right
+    for i = width, 1, -1 do
+        for j = height, 1, -1 do
+            if maze[i][j] == 1 then
+                maze[i][j] = 2
+            end
+        end
+    end
     
     return maze
 end
