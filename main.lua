@@ -3,11 +3,13 @@ require 'random'
 
 local xPos = 1
 local yPos = 1
+local xSize = 16
+local ySize = 16
 
 function love.load()
     -- get the maze from maze.lua
     local maze = {}
-    maze = getMaze(10,10)
+    maze = getMaze(xSize,ySize)
     
     -- load resources
     goalSprite = love.graphics.newImage("res/sprites/goal.png")
@@ -69,8 +71,8 @@ end
 
 function love.draw()
     -- draw the matrix
-    for i = 1, 10 do
-        for j = 1, 10 do
+    for i = 1, xSize do
+        for j = 1, ySize do
             love.graphics.draw(tileSprite, i*16, j*16)
             
             if (maze[i][j] == 0) then
