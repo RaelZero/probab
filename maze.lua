@@ -6,7 +6,7 @@ local height = 0
 function debugPrint()
     local tab = {}
     
-    tab = getMaze(10,10)
+    tab = getMaze(16,16)
     
     print(inspect(tab))
 
@@ -63,20 +63,26 @@ function getMaze(x, y)
     
     generate(startR,startC)
     
+    switch = true
+    
     -- set starting to the farthest point to the left
     for i = 1, width do
         for j = 1, height do
-            if maze[i][j] == 1 then
+            if maze[i][j] == 1 and switch == true then
                 maze[i][j] = 3
+                switch = false
             end
         end
     end
     
+    switch = true
+    
     -- set goal to the farthest point to the right
     for i = width, 1, -1 do
         for j = height, 1, -1 do
-            if maze[i][j] == 1 then
+            if maze[i][j] == 1 and switch == true then
                 maze[i][j] = 2
+                switch = false
             end
         end
     end
