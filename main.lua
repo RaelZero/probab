@@ -40,7 +40,7 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-    if (key == 'w') then
+    if (key == 'w' or key == 'up') then
         if (maze [xPos][yPos-1] ~= nil
             and maze [xPos][yPos-1] ~= 0
             and xPos > 0
@@ -49,7 +49,7 @@ function love.keypressed(key)
             and yPos-1 <= 16)
             then yPos = yPos-1 end
             
-    elseif (key == 'a') then
+    elseif (key == 'a' or key == 'left') then
         if (maze [xPos-1][yPos] ~= nil
             and maze [xPos-1][yPos] ~= 0
             and xPos-1 > 0
@@ -58,7 +58,7 @@ function love.keypressed(key)
             and yPos <= 16)
             then xPos = xPos-1 end
             
-    elseif (key == 's') then
+    elseif (key == 's' or key == 'down') then
         if (maze [xPos][yPos+1] ~= nil
             and maze [xPos][yPos+1] ~= 0
             and xPos > 0
@@ -67,7 +67,7 @@ function love.keypressed(key)
             and yPos+1 <= 16)
             then yPos = yPos+1 end
             
-    elseif (key == 'd') then
+    elseif (key == 'd' or key == 'right') then
         if (maze [xPos+1][yPos] ~= nil
             and maze [xPos+1][yPos] ~= 0
             and xPos+1 > 0
